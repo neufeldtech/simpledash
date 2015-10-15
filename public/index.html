@@ -4,14 +4,21 @@
 <body>
 
 <div ng-app="myApp" ng-controller="customersCtrl">
-<input ng-model="url" type="text" placeholder="url" title="url to check"></input>
-<input ng-model="timeout" type="number" placeholder="2500" title="timeout (ms)"></input>
-<button ng-click="checkSite()">Click to check</button>
-<p>
-  {{url}}
-  {{timeout}}
-  Result: {{result.status}}
-</p>
+
+  <form ng-submit="checkSite()">
+
+    <input ng-model="url" type="text" placeholder="url" title="url to check"></input>
+    <button ng-click="checkSite()">Click to check</button>
+    <p>
+      URL: {{url}}
+    </p>
+    <p>
+      Status: {{result.status}}
+    </p>
+    <p>
+      Message: {{result.message}}
+    </p>
+  </form>
 </div>
 
 <script>
@@ -20,10 +27,10 @@ app.controller('customersCtrl', function($scope, $http) {
 
 $scope.checkSite = function() {
   $scope.timeout = $scope.timeout || 2500
-  $http.get("http://localhost:8080/query?url="+$scope.url+"&timeout="+$scope.timeout)
+  $http.get("http://localhost:8080/query?url="+$scope.url)
   .then(function (response) {
     $scope.result = response.data ;}, function(){
-    $scope.result = {"status":"error"}
+    $scope.result = {"status":"error","message": "Network connectivity error"}
   });
 }
 

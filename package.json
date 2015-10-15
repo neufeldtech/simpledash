@@ -3,14 +3,12 @@
   "version": "0.0.0",
   "description": "Simple HTTP status dashboard.",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "@jordanband",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.7.1",
     "express": "^4.13.3",
+    "redis": "^2.2.3",
     "request": "^2.65.0"
   }
 }
