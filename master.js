@@ -5,12 +5,11 @@ var client = redis.createClient();
 client.on('connect', function() {
     console.log('connected to redis');
 });
-var urls = [ "http://www.facebook.com","http://www.twitter.com","http://www.nfl.com","http://origin-prod.www.nfl.com","http://www.google.com","http://www.schmoggle.google.ca","http://www.ebay.com","http://www.skipthedecisions.ml", "http://www.brandonsun.com","http://www.brandonsun2.com"]
-//var urls = ['http://www.nfl.com', 'http://www.google.ca', 'http://origin-prod.www.nfl.com']
 
+var urls = ['http://brandonsun.com','http://brandonsun2.com','http://classifieds.brandonsun.com','http://brandonsunsells.com','http://brandonsun.can.newsmemory.com']
 function checkSites(urls) {
   for(var i=0; i < urls.length ;i++) {
-    var processCommand = 'nodejs worker.js '+urls[i]+' 10000';
+    var processCommand = 'nodejs worker.js '+urls[i]+' 8000';
     console.log('FIRING: '+processCommand);
     exec(processCommand, function(error, stdout, stderr) {
       var json = JSON.parse(stdout.trim());
