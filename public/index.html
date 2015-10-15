@@ -60,19 +60,27 @@ $scope.testDomains = [
 ];
 
 //loop through all the domains, and return the status back into the testdomains object
-
-  for (var i = 0; i < $scope.testDomains.length; i++) {
-     (function(i){
-        var url = $scope.testDomains[i].url;
-        $http.get("http://api.trenttools.tk/query?url="+url)
-        .then(function (response) {
-          $scope.testDomains[i].status = response.data.status
-           console.log("Status of: "+$scope.testDomains[i].pretty+": "+$scope.testDomains[i].status);
-        }, function () {
-           console.log('error with the http call to the api');
-           });
-        })(i);
+  function getData() {
+    for (var i = 0; i < $scope.testDomains.length; i++) {
+       (function(i){
+          var url = $scope.testDomains[i].url;
+          $http.get("http://api.trenttools.tk/query?url="+url)
+          .then(function (response) {
+            $scope.testDomains[i].status = response.data.status
+             console.log("Status of: "+$scope.testDomains[i].pretty+": "+$scope.testDomains[i].status);
+          }, function () {
+             console.log('error with the http call to the api');
+             });
+          })(i);
+    }
   }
+
+  getData();
+  var seconds = 30, the_interval = seconds  * 1000;
+  setInterval(function() {
+    getData();
+  }, the_interval);
+
 });
 </script>
 
