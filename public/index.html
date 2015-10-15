@@ -64,7 +64,7 @@ $scope.testDomains = [
   for (var i = 0; i < $scope.testDomains.length; i++) {
      (function(i){
         var url = $scope.testDomains[i].url;
-        $http.get("http://192.168.0.108:8080/query?url="+url)
+        $http.get("http://api.trenttools.tk/query?url="+url)
         .then(function (response) {
           $scope.testDomains[i].status = response.data.status
            console.log("Status of: "+$scope.testDomains[i].pretty+": "+$scope.testDomains[i].status);
